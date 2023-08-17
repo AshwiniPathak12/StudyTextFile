@@ -1,0 +1,60 @@
+		List<String> al = new ArrayList<String>();
+
+		al.add("ashwini");
+		al.add("priya");
+		al.add("monika");
+		al.add("pratiksha");
+		al.add("asmita");
+		al.add("pinki");
+		al.add("pinki");
+
+		//use distinct
+		List<String> Remve_Dupl = al.stream().distinct().collect(Collectors.toList());
+		System.out.println(Remve_Dupl);
+		
+		
+		//length
+		//List<String> length=al.stream().filter(i->i.length()).collect(Collectors.toList());
+		
+		List<String> asending_list = al.stream().sorted().collect(Collectors.toList());
+		System.out.println(asending_list);
+
+		List<String> desc_list = al.stream().sorted((a, b) -> b.compareTo(a)).collect(Collectors.toList());
+		System.out.println(desc_list);
+
+		List<String> length_6 = al.stream().filter(i -> i.length() > 6).collect(Collectors.toList());
+		System.out.println(length_6);
+
+		long count = al.stream().filter(i -> i.length() > 6).count();
+		System.out.println(count);
+
+		List<String> a_start = al.stream().filter(i -> i.startsWith("a")).collect(Collectors.toList());
+		System.out.println(a_start);
+		
+		long count2=al.stream().filter(i->i.startsWith("a")).count();
+		System.out.println(count2);
+		
+		List<String> toUpper=al.stream().map(i->i.toUpperCase()).collect(Collectors.toList());
+		System.out.println(toUpper);
+		
+		List<String> toLower=al.stream().map(i->i.toLowerCase()).collect(Collectors.toList());
+		System.out.println(toLower);
+		
+		List<Boolean> a=al.stream().map(i->i.isEmpty()).collect(Collectors.toList());
+		System.out.println(a);
+==================================================
+ String name = "This is yash technology yash ravi yash"; 
+		  Map<String, Integer>map = new HashMap<>();
+		  Arrays.asList(name.split("")).forEach(s -> map.put(s,
+		  map.getOrDefault(s, 0) + 1));
+		  map.forEach((k, v) -> System.out.println(k +" :" + v));
+
+Output is:  :6 a :4 c :1 e :1 g :1 h :5 i :3 l :1 n :1 o :2 r :1 s :5 T :1 t :1 v :1 y :4 
+============================================================
+String sr = "Hello word Hello";
+		int count = 0;
+		String s[] = sr.split(" ");
+		ArrayList<String> al = new ArrayList<String>();
+		for (int i = 0; i < s.length; i++) {
+			al.add(s[i]);
+			System.out.println(s[i] + ">>" + Collections.frequency(al, s[i]));

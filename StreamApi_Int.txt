@@ -1,0 +1,65 @@
+		List<Integer> al = new ArrayList<Integer>();
+		al.add(10);
+		al.add(15);
+		al.add(25);
+		al.add(20);
+
+		List<Integer> even_list = al.stream()
+                                            .filter(i -> i % 2 == 0).collect(Collectors.toList());
+		System.out.println("Even List is: " + even_list);
+
+		List<Integer> odd_list = al.stream()
+                                           .filter(i -> i % 2 != 0).collect(Collectors.toList());
+		System.out.println("Odd list is: " + odd_list);
+
+		List<Integer> add5_even = al.stream()
+                                            .filter(i -> i % 2 == 0)
+                                            .map(i -> i + 5).collect(Collectors.toList());
+		System.out.println(add5_even);
+
+		List<Integer> add5_odd = al.stream()
+                                            .filter(i -> i % 2 != 0)
+                                            .map(i -> i + 5).collect(Collectors.toList());
+		System.out.println(add5_odd);
+
+		List<Integer> even_great10 = al.stream()
+                                               .filter(i -> i % 2 == 0).filter(i -> i > 10)
+				               .collect(Collectors.toList());
+		System.out.println("Greater than 10 and even: "+even_great10);
+		
+		long count=al.stream()
+                             .filter(i->i%2==0)
+                             .filter(i->i>10).count();
+		System.out.println(count);
+
+		List<Integer> asending_List=al.stream()
+                                              .sorted().collect(Collectors.toList());
+		System.out.println(asending_List);
+		
+		List<Integer> Desending_List=al.stream()
+                                               .sorted((a,b)->b.compareTo(a)).collect(Collectors.toList());
+		System.out.println(Desending_List);
+		
+		int min_number=al.stream()
+                                 .min((s1,s2)->s1.compareTo(s2)).get();
+		System.out.println(min_number);
+		
+		int max_number=al.stream()
+                                 .max((s1,s2)-> s1.compareTo(s2)).get();
+		System.out.println(max_number);
+		
+		 int secondLargestNumber =al.stream()
+	                                    .sorted(Comparator.reverseOrder())
+	                                    .skip(2)
+                                            .findFirst()
+	                                    .get();
+		 System.out.println(secondLargestNumber);
+
+===================================================================================================================
+int num = 121217167;
+		String s = Integer.toString(num);
+		List<String> list = Arrays.asList(s.split(""));
+		Set<String> set = new HashSet<>();
+		list.stream().filter(a -> !set.add(a)).collect(Collectors.toSet()).forEach(System.out::println);
+
+//ouput 1 2 7 only repeated

@@ -1,0 +1,91 @@
+package com.ashok.it;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+public class Emp {
+
+	String name;
+	int salary;
+	int age;
+
+	Emp() {
+	}
+
+	public Emp(String name, int salary, int age) {
+		super();
+		this.name = name;
+		this.salary = salary;
+		this.age = age;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", salary=" + salary + ", age=" + age + "]";
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getSalary() {
+		return salary;
+	}
+
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public int hashcode() {
+		return age;
+	}
+
+	public static void main(String[] agrs) {
+		List<Emp> emplist = new ArrayList<Emp>();
+
+		Emp e1 = new Emp("monika", 5000, 30);
+		Emp e2 = new Emp("asmita", 100, 25);
+		Emp e3 = new Emp("ashu", 6065, 24);
+		Emp e4 = new Emp("rtt", 7045, 28);
+
+		emplist.add(e1);
+		emplist.add(e3);
+		emplist.add(e4);
+		emplist.add(e2);
+		
+		List <String> al = new ArrayList<String>();
+		al.add("Pratiksha");
+		al.add("Ashu");
+		al.add("Piya");
+		al.add("Pratiksha");
+		al.add("Shubhu");
+		al.add("Shubhu");
+		
+		//al.stram for loop like
+		List<String> skip = al.stream().skip(2).collect(Collectors.toList());
+		System.out.println("skip demo: "+skip);
+		
+		List<String> limit = al.stream().limit(2).collect(Collectors.toList());
+		System.out.println("limit demo:" +limit);
+		
+		List<String> skipWithFilter = al.stream().skip(2).filter(a->a.contains("P")).collect(Collectors.toList());
+		System.out.println("skip With Filter A" +skipWithFilter);
+
+	}
+
+}

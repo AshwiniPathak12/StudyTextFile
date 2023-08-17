@@ -1,0 +1,236 @@
+package com.ashok.it;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.IntSummaryStatistics;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+//implements Comparable<Employee>
+public class Employee {
+
+	String name;
+	int salary;
+	int age;
+
+	Employee() {
+	}
+
+	public Employee(String name, int salary, int age) {
+		super();
+		this.name = name;
+		this.salary = salary;
+		this.age = age;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", salary=" + salary + ", age=" + age + "]";
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getSalary() {
+		return salary;
+	}
+
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public int hashcode() {
+		return age;
+	}
+
+	public static void main(String[] agrs) {
+		List<Employee> emplist = new ArrayList<Employee>();
+
+		Employee e1 = new Employee("monika", 400, 30);
+		Employee e2 = new Employee("asmita", 100, 25);
+		Employee e3 = new Employee("ashu", 300, 22);
+		Employee e4 = new Employee("rtt", 200, 20);
+
+		emplist.add(e1);
+		emplist.add(e3);
+		emplist.add(e4);
+
+		emplist.add(e2);
+
+		// Q extract all emp name
+		// Here map is used bcoz map internally uses Function Interface
+		// Function Interface it takes one argument and return one argument
+		// as per my knowledge normally I am uses filter but filter is not working here
+		// because
+		// Filter internally uses Predicate which take one argument and return boolean
+		List<String> collectOnlyName = emplist.stream().map((p) -> p.getName()).collect(Collectors.toList());
+		System.out.println("collect Only Name" + collectOnlyName);
+
+		List<String> collectStartWithName = emplist.stream().filter((a) -> a.getName().startsWith("r"))
+				.map((u) -> u.getName()).collect(Collectors.toList());
+		System.out.println("collect Start With r Name " + collectStartWithName);
+		// from above example we can say we can use multiple intermediate opeartions
+
+		List<Employee> collectStartWithNameEmpData = emplist.stream().filter((a) -> a.getName().startsWith("r"))
+				.collect(Collectors.toList());
+		System.out.println("collect StartWith r name EmpData" + collectStartWithNameEmpData);
+
+		// Q sort desending data based on age
+		List<Employee> sortAge = emplist.stream().sorted((a, b) -> b.getAge() - a.getAge())
+				.collect(Collectors.toList());
+		System.out.println("desending sortAge is: " + sortAge);
+
+		List<Employee> collect = emplist.stream().distinct().collect(Collectors.toList());
+		System.out.println("Distinct :" + collect);
+
+		Employee employeeLowSalary = emplist.stream().min((a, b) -> a.getSalary() - b.getSalary()).get();
+		System.out.println(" employee Low Salary " + employeeLowSalary);
+
+		Employee employeeHighSalary = emplist.stream().max((a, b) -> a.getSalary() - b.getSalary()).get();
+		System.out.println(" employee High Salary: " + employeeHighSalary);
+
+		List<Employee> sortedSalary = emplist.stream().sorted((a, b) -> a.getSalary() - b.getSalary())
+				.collect(Collectors.toList());
+		System.out.println("sorted Salary: " + sortedSalary);
+
+		// For extra knowledge
+		Employee employee = emplist.stream()
+				.max((x, y) -> (x.getSalary() < y.getSalary()) ? 1 : ((x.getSalary() == y.getSalary()) ? 0 : -1)).get();
+		System.out.println("low salary employee is:" + employee);
+
+		// 100 200 300 400
+		List<Employee> SecondLowest = emplist.stream()
+				.sorted((x, y) -> (x.getSalary() < y.getSalary()) ? -1 : ((x.getSalary() == y.getSalary()) ? 0 : 1))
+				.limit(2).skip(1).collect(Collectors.toList());
+
+		System.out.println("Second Lowest salary is :" + SecondLowest);
+
+		// 4 3 2 1
+		List<Employee> SecondHighest = emplist.stream()
+				.sorted((x, y) -> (x.getSalary() < y.getSalary()) ? 1 : ((x.getSalary() == y.getSalary()) ? 0 : -1))
+				.limit(2).skip(1).collect(Collectors.toList());
+		System.out.println("Second Lowest salary is :" + SecondHighest);
+
+		Map<Employee, Long> CalculateCount = emplist.stream()
+				.collect(Collectors.groupingBy(p -> p, Collectors.counting()));
+		System.out.println("Calculate Count" + CalculateCount);
+		// Average Saalry
+
+		IntSummaryStatistics collect1 = emplist.stream().collect(Collectors.summarizingInt(p -> p.getAge()));
+		System.out.println("Data is:" + collect);
+//		 System.out.println(collect1.getAverage());
+//		 System.out.println(collect1.getCount());
+//		 System.out.println(collect1.getMax());
+//		 System.out.println(collect1.getMin());
+//		 System.out.println(collect1.getSum());
+
+		Map<String, Employee> NameKeyObjValue = emplist.stream().collect(Collectors.toMap(p -> p.getName(), p -> p));
+		System.out.println("Name as a Key Obj as a Value" + NameKeyObjValue);
+
+		Map<Integer, Employee> AgeKeyObjValue = emplist.stream().collect(Collectors.toMap(p -> p.getAge(), p -> p));
+		System.out.println("Age as a Key Obj as a Value" + AgeKeyObjValue);
+
+	}
+
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+List <String> al = new ArrayList<String>();
+		al.add("Pratiksha");
+		al.add("Ashu");
+		al.add("Piya");
+		al.add("Pratiksha");
+		al.add("Shubhu");
+		al.add("Shubhu");
+		
+		System.out.println("Before Delete Duplicate: "+al);
+		//Count frquency
+		Map<String, Long> collectCount = al.stream().collect(Collectors.groupingBy(p->p , Collectors.counting()));
+		System.out.println("collect Count "+collectCount);
+		
+		long countLength = al.stream().count();
+		System.out.println("count Length Before Distinct: " +countLength);
+		//Find Duplicate and delete it
+		List<String> deleteDuplicate = al.stream().distinct().collect(Collectors.toList());
+		System.out.println("delete Duplicate: "+deleteDuplicate );
+		
+		long count = al.stream().distinct().count();
+		System.out.println("Length After Distinct "+count);
+		
+		//based on ASCII value sort it
+		Collections.sort(al);
+		System.out.println("By usong Collection inbuilt method: "+al);
+		
+		List<String> sorted = al.stream().sorted().collect(Collectors.toList());
+		System.out.println("sorted data is:" +sorted);
+		
+		//Before JAVA8
+		Collections.sort(al, Collections.reverseOrder());
+		System.out.println("Before Java8: "+al);
+		List<String> reverseOrder = al.stream().sorted((a,b)->b.compareTo(a)).collect(Collectors.toList());
+        System.out.println("reverseOrder is:"+reverseOrder);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+HashMap<Integer, String> hm = new HashMap<>();
+		hm.put(10, "Ashwini");
+		hm.put(11, "Piya");
+		hm.put(12, "Shubhangi");
+		hm.put(9, "Pratiksha");
+
+		// We Directly can not apply stream on map bcoz map is not direct child of
+		// collection
+		// So first convert it into set or list by using entrySet
+		System.out.println("==By Key Sorting==");
+		hm.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(p -> System.out.println(p));
+
+		System.out.println("==By Key Reverse Sorting==");
+		hm.entrySet().stream().sorted(Map.Entry.comparingByKey(Collections.reverseOrder()))
+				.forEach(p -> System.out.println(p));
+
+		System.out.println("==By Value Sorting==");
+		hm.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(p -> System.out.println(p));
+
+		System.out.println("==By Value Reverse Sorting==");
+		hm.entrySet().stream().sorted(Map.Entry.comparingByValue(Collections.reverseOrder()))
+				.forEach(p -> System.out.println(p));
+
+		String s = "abc def abc efg";
+		HashMap<String, Integer> hm1 = new HashMap<>();
+		Arrays.asList((s.split(" "))).forEach(s1 -> hm1.put(s1, hm1.getOrDefault(s1, 0) + 1));
+		System.out.println("====frq of each word==========" + hm1);
+
+		Map<String, Long> collect2 = Arrays.asList(s.split(" ")).stream()
+				.collect(Collectors.groupingBy(p -> p, Collectors.counting()));
+		System.out.println("====2nd approach ==============" + collect2);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Student e1 = new Student(1, "ashu", 10000, 29);
+			Student e2 = new Student(1, "ashu", 10000, 29);		
+			stdlist.add(e1);
+			stdlist.add(e2);
+			
+			long count = stdlist.stream().count();
+			System.out.println("count: "+count);
+			
+			List<Student> collect = stdlist.stream().distinct().collect(Collectors.toList());
+			System.out.println(collect);
+		
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

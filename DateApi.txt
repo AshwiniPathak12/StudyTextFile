@@ -1,0 +1,63 @@
+	public static void main(String[]agrs) {
+		
+	//java.sql.Date just represent DATE without time information
+		//while java.util.Date represents both Date and Time information.
+		
+		//there are two package java.util and java.sql
+		//but to avoid unnecessary info we use from java.time.LocaleDate
+		Date d= new Date();
+		System.out.println("Date by Date from java.util");
+		System.out.println(d);
+		System.out.println("Output is::Wed Aug 16 17:50:51 IST 2023");
+		
+		System.out.println("============================================");
+		
+		LocalDate d1= LocalDate.of(2023,8, 07);
+		System.out.println("Date by Date from java.time.Localedate Java8");
+		System.out.println(d1);
+		System.out.println("Output is:: 2023-08-07");
+		
+		System.out.println("============================================");
+		System.out.println("Only Time");
+		LocalTime d2=LocalTime.now();
+		System.out.println(d2);
+		System.out.println("Outut is:: 17:50:51.200228300");
+		
+		System.out.println("============================================");
+		System.out.println("Only Date Time");
+		LocalDateTime d3=LocalDateTime.now();
+		System.out.println(d3);
+		System.out.println("Output is :: 2023-08-16T17:50:51.200228300");
+		
+		System.out.println("============================================");
+		System.out.println("Want To check diff");	
+		System.out.println("Minus Days");
+		LocalDate minusDays = d1.minusDays(30);
+		System.out.println(minusDays);
+		System.out.println("Output is :: 2023-07-08 ");
+		
+		System.out.println("============================================");
+		System.out.println("Add Days");
+		LocalDate plusDays = d1.plusDays(31);
+		System.out.println(plusDays);
+		System.out.println("Output is :: 2023-09-07");
+		
+		System.out.println("==ByUsing Period==============================");
+		LocalDate r1=LocalDate.of(2023, 7, 30);
+		LocalDate r2= LocalDate.of(2023, 4, 9);		
+		System.out.println(Period.between(r2, r1).getYears());
+		System.out.println(Period.between(r2, r1).getMonths());
+		System.out.println(Period.between(r2, r1).getDays());
+		System.out.println("Output is:: 0 3 21");
+		
+		//System.out.println("======By using Duration========================");
+		//System.out.println(Duration.between(r1, r2).toDays());
+		//System.out.println(Duration.between(r2, r1).toHours());
+		//System.out.println(Duration.between(r2, r1).toMinutes());
+		
+		System.out.println("======By using ZonedTimeDate========================");
+		ZoneId ofObj = ZoneId.of("America/Chicago");
+		ZonedDateTime z= ZonedDateTime.now();		
+		System.out.println(z.withZoneSameInstant(ofObj));
+		System.out.println("Output is :: 2023-08-16T07:20:51.207474400-05:00[America/Chicago]");
+	}

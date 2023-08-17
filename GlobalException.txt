@@ -1,0 +1,39 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+public class ExceptionInfo {
+
+	private String code;
+	private String msg;
+	private LocalDateTime date;
+
+//const
+//getter
+//setter
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+package com.yash.exception;
+
+import java.time.LocalDateTime;
+
+import com.yash.service.ResourceNotFoundException;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+public class GlobalExceptionHandle {
+
+	@ExceptionHandler(value = ResourceNotFoundException.class)
+	public ResponseEntity<ExceptionInfo> handleGlobalException(ResourceNotFoundException rf) {
+		ExceptionInfo exceptionInfo = new ExceptionInfo();
+		exceptionInfo.setCode("NA404");
+		exceptionInfo.setMsg("This Emp Data Id not available in database");
+		exceptionInfo.setDate(LocalDateTime.now());
+
+		return new ResponseEntity<>(exceptionInfo, HttpStatus.BAD_REQUEST);
+	}
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////

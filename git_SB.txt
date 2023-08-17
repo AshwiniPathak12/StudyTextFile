@@ -1,0 +1,161 @@
+Spring Boot
+
+OPEN LOCAL TERMINAL
+
+1) git init
+2) git status
+
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .gitignore
+        .mvn/
+        mvnw
+        mvnw.cmd
+        pom.xml
+        src/
+
+3) git add .
+4) git commit -m "first task"
+
+5) git status
+=========
+imp-- git branch -M main
+
+You mention in your own answer that git branch -m main (or the same with -M) only works once you have an initial commit.
+
+Alternatively, before creating any commits, use git checkout -b main to switch the name of the unborn branch to main
+===========
+
+On branch master
+nothing to commit, working tree clean
+
+6) git remote add origin https://github.com/AshwiniPathak12/Task.git
+7)git remote -v
+this is used to verify
+origin  https://github.com/AshwiniPathak12/Task.git (fetch)
+origin  https://github.com/AshwiniPathak12/Task.git (push)
+
+8)git push -u origin master
+9) git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+10)If any changes Remote so to reflect it locally
+use git pull
+
+
+11) git log
+shows all log history
+
+12)git log --oneline
+38f6985 (HEAD -> master, origin/master) Update EmployeeRepository.java
+4141110 first task
+
+
+13)git log -p -2
+
+14)git diff 38f698551049379c9bd117c8b42465d730978903 4141110d4da29d59c1952521983d2c30300aaa0f
+
+diff bet two commit
+difference show in green color
+
+
+
+====================Other Command================
+git version
+
+git config --global user.name"ashwini"
+check->>git config user.name
+
+git config --global user.email
+check->>git config user.email
+
+check->>git config --list
+
+==========================================
+Undo Before checkout
+vi index.html
+cat index.html
+change file git status
+
+git chekout index.html   for 1 file
+git checkout -f          for multiple file
+===========================================
+Undo After stage
+
+git add.
+git reset HEAD index.html    this change in staging area not local
+git checkout index.html      this is used for local
+=============================================
+git remote -v              -->>Show all remote repo
+git push -u origin master  -->>from local to remote repo
+================================================
+Diff bet fetch and pull
+
+git fetch --> only refelct not fetch actual changes
+git pull --->reflect changes as well as fetch changes
+======================================================
+Diff bet revert and reset
+
+Be careful while use reset it will cause data loss
+to avoid it use reset
+
+1-->2-->3-->4 head at 4
+have issue with commit 3&4
+so Head at 2
+
+git reset --hard  
+git push -f        -->force update to remote repo
+
+
+new commit 3->3'  again 2->2' like
+git revert head
+git push
+
+=============================
+
+git rm
+Remove from working directory with staging area
+
+
+git rm --cached
+only from staging ares
+remains on HardDisk
+
+git rm --cached*
+remove all files at a time
+
+=================================
+git status -s
+short summersied status
+
+mylogs.log
+if want to ignore logs in my log folder
+
+*.log
+any file with .log extension want to ignore then use
+
+===================================
+git branch dev      create dev branch
+git checkout dev    switch to dev branch
+
+git checkout -b dev    create as well as on dev branch
+
+git branch -d name      used to delete branch
+==================================
+git remote add origin
+Remote repo
+One url that connect our reomte with local
+=====================
+git remote add origin https://github.com/<your-github-username>/new-repository.git
+=========================
+
+at the time of push it ask for credentials 4
+at the time of pull not necessary
+============
+:qa! for exit
+:qw  for save
